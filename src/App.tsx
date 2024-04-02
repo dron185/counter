@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Scoreboard} from "./components/Scoreboard";
+import {IncBtn} from "./components/IncBtn";
+import {ResetBtn} from "./components/ResetBtn";
 
 function App() {
+
+    const [score, setScore] = useState(0)
+
+    const inc = (score: number) => {
+      score++;
+      if(score > 5) {
+          score = 5;
+      }
+      setScore(score)
+    }
+
+    const reset = (score: number) => {
+        score = 0;
+        setScore(score)
+    }
+
+    const incButtonDisabled = score === 5
+    const resButtonDisabled = score === 0
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Scoreboard score={score}/>
+        <IncBtn score={score} inc={inc} disable={incButtonDisabled}/>
+        <ResetBtn score={score} reset={reset} disable={resButtonDisabled}/>
     </div>
   );
 }
