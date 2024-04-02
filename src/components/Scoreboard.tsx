@@ -1,20 +1,23 @@
 import React from 'react';
+import styled from "styled-components";
 
 type ScoreboardProps = {
     score: number
 }
 
-const s = {
-    marginBottom: "20px",
-    fontSize: "50px",
-    border: "2px solid brown",
-    borderRadius: "10px"
-}
 
 export const Scoreboard = (props: ScoreboardProps) => {
     return (
-        <div style={s}>
+        <StyleScoreboard>
             {props.score}
-        </div>
+        </StyleScoreboard>
     );
 };
+
+
+const StyleScoreboard = styled.div`
+    margin-bottom: 20px;
+    font-size: 50px;
+    border: 5px solid #148383;
+    border-radius: 15px;
+`

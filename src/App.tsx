@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Scoreboard} from "./components/Scoreboard";
-import {IncBtn} from "./components/IncBtn";
-import {ResetBtn} from "./components/ResetBtn";
-import {Button} from "./components/Button";
+import {Button} from "./components/button/Button";
+import { ButtonContainer } from './components/ButtonContainer';
 
 function App() {
 
@@ -38,8 +37,10 @@ function App() {
         <Scoreboard score={score}/>
         {/*<IncBtn score={score} inc={inc} disable={incButtonDisabled}/>*/}
         {/*<ResetBtn score={score} reset={reset} disable={resButtonDisabled}/>*/}
-        <Button title={"inc"} disable={incButtonDisabled} onClickHandler={incHandler}/>
-        <Button title={"reset"} disable={resButtonDisabled} onClickHandler={resetHandler}/>
+        <ButtonContainer>
+            <Button title={"inc"} disable={incButtonDisabled} onClickHandler={incHandler}/>
+            <Button title={"reset"} disable={resButtonDisabled} onClickHandler={resetHandler}/>
+        </ButtonContainer>
     </div>
   );
 }
