@@ -1,15 +1,17 @@
 import React, {ChangeEvent} from 'react';
-import { S } from './InputLabel_Styles';
+import {S} from './InputLabel_Styles';
 
 type InputLabelPropsType = {
     htmlFor: string
     text: string
     id: string
-    setRestriction: (restriction: number)=>void
+    setRestriction: (value: number) => void
+    restriction: number
 }
 
 export const InputLabel = (props: InputLabelPropsType) => {
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+
+    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let value = Number(e.currentTarget.value);
         props.setRestriction(value)
     }
@@ -17,8 +19,10 @@ export const InputLabel = (props: InputLabelPropsType) => {
     return (
         <S.InputLabel>
             <S.TextValue htmlFor={props.htmlFor}>{props.text}</S.TextValue>
-            <S.Input id={props.id} type="number" onChange={onChangeHandler}/>
+            <S.Input
+                value={props.restriction}
+                onChange={onChangeInputHandler}
+                id={props.id} type="number"/>
         </S.InputLabel>
     );
 };
-

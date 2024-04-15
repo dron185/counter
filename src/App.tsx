@@ -9,11 +9,12 @@ import {ValueSettings} from './components/valueSettings/ValueSettings';
 function App() {
 
     const [score, setScore] = useState(0)
-    const [restriction, setRestriction] = useState(5)
+    const [restriction, setRestriction] = useState(0)
+    const [value, setValue] = useState(5)
 
     const inc = (score: number) => {
         score += 1;
-        (score > restriction) && (score = restriction);
+        (score > value) && (score = value);
         setScore(score)
     }
     const reset = (score: number) => {
@@ -26,21 +27,28 @@ function App() {
     const resetHandler = () => {
         reset(score)
     }
-    const incButtonDisabled = score === restriction
+    const incButtonDisabled = score === value
+
+    const callBackButtonHandler = () => {
+        setValue(restriction)
+    }
 
     return (
         <div className="App">
             <CounterContainer>
-                <ValueSettings setRestriction={setRestriction}/>
+                <ValueSettings setRestriction={setRestriction} restriction={restriction}/>
                 <ButtonContainer>
-                    <Button title={"set"} />
+                    <Button name={"set"} callBack={callBackButtonHandler}/>
                 </ButtonContainer>
             </CounterContainer>
             <CounterContainer>
-                <Scoreboard score={score} restriction={restriction}/>
+                <Scoreboard score={score} value={value}/>
                 <ButtonContainer>
-                    <Button title={"inc"} disable={incButtonDisabled} onClickHandler={incHandler}/>
-                    <Button title={"reset"} onClickHandler={resetHandler}/>
+                    <Button name={"inc"}
+                            disable={incButtonDisabled}
+                            callBack={incHandler}/>
+                    <Button name={"reset"}
+                            callBack={resetHandler}/>
                 </ButtonContainer>
             </CounterContainer>
         </div>

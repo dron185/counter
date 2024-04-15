@@ -2,13 +2,17 @@ import React from 'react';
 import {S} from './Button_Styles';
 
 type ButtonPropsType = {
-    title: string
+    name: string
     disable?: boolean
-    onClickHandler?: () => void
+    // onClickHandler?: () => void
+    callBack: () => void
 }
 
-export const Button = ({title, disable, onClickHandler}: ButtonPropsType) => {
+export const Button = ({name, disable, callBack}: ButtonPropsType) => {
+    const onClickButtonHandler = () => {
+        callBack()
+    }
     return (
-        <S.Button disabled={disable} onClick={onClickHandler}>{title}</S.Button>
+        <S.Button disabled={disable} onClick={onClickButtonHandler}>{name}</S.Button>
     );
 };

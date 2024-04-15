@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 type ScoreboardProps = {
     score: number
-    restriction: number
+    value: number
 }
 
 export const Scoreboard = (props: ScoreboardProps) => {
     return (
         <StyleScoreboard>
-            <Score style={{color: props.score === props.restriction ? "red" : ""}}>{props.score}</Score>
+            <Score style={{color: props.score === props.value ? "red" : ""}}>{props.score}</Score>
         </StyleScoreboard>
     );
 };
