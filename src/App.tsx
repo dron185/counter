@@ -9,7 +9,8 @@ import {ValueSettings} from './components/valueSettings/ValueSettings';
 function App() {
 
     const [score, setScore] = useState(0)
-    const [restriction, setRestriction] = useState(0)
+    const [maxValue, setMaxValue] = useState(0)
+    const [startValue, setStartValue] = useState(0)
     const [value, setValue] = useState(5)
 
     const inc = (score: number) => {
@@ -18,7 +19,7 @@ function App() {
         setScore(score)
     }
     const reset = (score: number) => {
-        score = 0;
+        score = startValue;
         setScore(score)
     }
     const incHandler = () => {
@@ -30,13 +31,21 @@ function App() {
     const incButtonDisabled = score === value
 
     const callBackButtonHandler = () => {
-        setValue(restriction)
+        setValue(maxValue)
+        setScore(startValue)
     }
 
     return (
         <div className="App">
             <CounterContainer>
-                <ValueSettings setRestriction={setRestriction} restriction={restriction}/>
+                <ValueSettings
+                    setMaxValue={setMaxValue}
+                    maxValue={maxValue}
+                    setStartValue={setStartValue}
+                    startValue={startValue}
+                    setScore={setScore}
+                    score={score}
+                />
                 <ButtonContainer>
                     <Button name={"set"} callBack={callBackButtonHandler}/>
                 </ButtonContainer>
@@ -44,11 +53,15 @@ function App() {
             <CounterContainer>
                 <Scoreboard score={score} value={value}/>
                 <ButtonContainer>
-                    <Button name={"inc"}
-                            disable={incButtonDisabled}
-                            callBack={incHandler}/>
-                    <Button name={"reset"}
-                            callBack={resetHandler}/>
+                    <Button
+                        name={"inc"}
+                        disable={incButtonDisabled}
+                        callBack={incHandler}
+                    />
+                    <Button
+                        name={"reset"}
+                        callBack={resetHandler}
+                    />
                 </ButtonContainer>
             </CounterContainer>
         </div>

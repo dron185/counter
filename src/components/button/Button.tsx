@@ -4,7 +4,6 @@ import {S} from './Button_Styles';
 type ButtonPropsType = {
     name: string
     disable?: boolean
-    // onClickHandler?: () => void
     callBack: () => void
 }
 

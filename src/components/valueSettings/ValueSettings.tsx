@@ -3,24 +3,25 @@ import {S} from './ValueSettings_Styles';
 import {InputLabel} from "./inputLabel/InputLabel";
 
 type ValueSettingsPropsType = {
-    setRestriction: (value: number) => void
-    restriction: number
+    setStartValue: (value: number) => void
+    startValue: number
+    setMaxValue: (value: number) => void
+    maxValue: number
+    setScore: (value: number) => void
+    score: number
 }
 
 export const ValueSettings = (props: ValueSettingsPropsType) => {
-    // здесь написать 2 ф. передать сюда setScore
-
-
     return (
         <S.ValueSettingsContainer>
             <InputLabel
-                setRestriction={props.setRestriction}
-                restriction={props.restriction}
+                setNewValue={props.setMaxValue}
+                newValue={props.maxValue}
                 htmlFor={"max"} text={"max value:"}
                 id={"max"}/>
             <InputLabel
-                setRestriction={props.setRestriction}
-                restriction={props.restriction}
+                setNewValue={props.setStartValue}
+                newValue={props.startValue}
                 htmlFor={"start"} text={"start value:"}
                 id={"start"}/>
         </S.ValueSettingsContainer>

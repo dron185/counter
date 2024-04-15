@@ -5,24 +5,25 @@ type InputLabelPropsType = {
     htmlFor: string
     text: string
     id: string
-    setRestriction: (value: number) => void
-    restriction: number
+    setNewValue: (value: number) => void
+    newValue: number
 }
 
 export const InputLabel = (props: InputLabelPropsType) => {
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let value = Number(e.currentTarget.value);
-        props.setRestriction(value)
+        props.setNewValue(value)
     }
 
     return (
         <S.InputLabel>
             <S.TextValue htmlFor={props.htmlFor}>{props.text}</S.TextValue>
             <S.Input
-                value={props.restriction}
+                value={props.newValue}
                 onChange={onChangeInputHandler}
-                id={props.id} type="number"/>
+                id={props.id} type="number"
+            />
         </S.InputLabel>
     );
 };
