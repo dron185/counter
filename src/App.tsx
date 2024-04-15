@@ -12,6 +12,7 @@ function App() {
     const [maxValue, setMaxValue] = useState(0)
     const [startValue, setStartValue] = useState(0)
     const [value, setValue] = useState(5)
+    const [isDisabled, setIsDisabled] = useState(false)
 
     const inc = (score: number) => {
         score += 1;
@@ -28,11 +29,11 @@ function App() {
     const resetHandler = () => {
         reset(score)
     }
-    const isButtonDisabled = score === value
 
     const callBackButtonHandler = () => {
         setValue(maxValue)
         setScore(startValue)
+        setIsDisabled(true)
     }
 
     return (
@@ -45,11 +46,13 @@ function App() {
                     startValue={startValue}
                     setScore={setScore}
                     score={score}
+                    setIsDisabled={setIsDisabled}
                 />
                 <ButtonContainer>
                     <Button
                         name={"set"}
                         callBack={callBackButtonHandler}
+                        disable={isDisabled}
                     />
                 </ButtonContainer>
             </CounterContainer>
@@ -58,7 +61,7 @@ function App() {
                 <ButtonContainer>
                     <Button
                         name={"inc"}
-                        disable={isButtonDisabled}
+                        disable={score === value}
                         callBack={incHandler}
                     />
                     <Button

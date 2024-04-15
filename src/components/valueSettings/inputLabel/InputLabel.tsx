@@ -7,6 +7,7 @@ type InputLabelPropsType = {
     id: string
     setNewValue: (value: number) => void
     newValue: number
+    setIsDisabled: (value: boolean) => void
 }
 
 export const InputLabel = (props: InputLabelPropsType) => {
@@ -14,6 +15,7 @@ export const InputLabel = (props: InputLabelPropsType) => {
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let value = Number(e.currentTarget.value);
         props.setNewValue(value)
+        props.setIsDisabled(false)
     }
 
     return (

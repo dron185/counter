@@ -9,6 +9,7 @@ type ValueSettingsPropsType = {
     maxValue: number
     setScore: (value: number) => void
     score: number
+    setIsDisabled: (value: boolean) => void
 }
 
 export const ValueSettings = (props: ValueSettingsPropsType) => {
@@ -18,12 +19,16 @@ export const ValueSettings = (props: ValueSettingsPropsType) => {
                 setNewValue={props.setMaxValue}
                 newValue={props.maxValue}
                 htmlFor={"max"} text={"max value:"}
-                id={"max"}/>
+                id={"max"}
+                setIsDisabled={props.setIsDisabled}
+            />
             <InputLabel
                 setNewValue={props.setStartValue}
                 newValue={props.startValue}
                 htmlFor={"start"} text={"start value:"}
-                id={"start"}/>
+                id={"start"}
+                setIsDisabled={props.setIsDisabled}
+            />
         </S.ValueSettingsContainer>
     );
 };
