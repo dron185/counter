@@ -1,48 +1,50 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Scoreboard} from "./components/Scoreboard";
+import {Scoreboard} from "./components/scoreboard/Scoreboard";
 import {Button} from "./components/button/Button";
-import { ButtonContainer } from './components/ButtonContainer';
+import {ButtonContainer} from './components/ButtonContainer';
+import {CounterContainer} from './components/CounterContainer';
+import {ValueSettings} from './components/valueSettings/ValueSettings';
 
 function App() {
 
     const [score, setScore] = useState(0)
+    const [restriction, setRestriction] = useState(5)
 
     const inc = (score: number) => {
-      score++;
-      if(score > 5) {
-          score = 5;
-      }
-      setScore(score)
+        score += 1;
+        (score > restriction) && (score = restriction);
+        setScore(score)
     }
-
     const reset = (score: number) => {
         score = 0;
         setScore(score)
     }
-
     const incHandler = () => {
         inc(score)
     }
-
     const resetHandler = () => {
         reset(score)
     }
+    const incButtonDisabled = score === restriction
 
-    const incButtonDisabled = score === 5
-    const resButtonDisabled = score === 0
-
-  return (
-    <div className="App">
-        <Scoreboard score={score}/>
-        {/*<IncBtn score={score} inc={inc} disable={incButtonDisabled}/>*/}
-        {/*<ResetBtn score={score} reset={reset} disable={resButtonDisabled}/>*/}
-        <ButtonContainer>
-            <Button title={"inc"} disable={incButtonDisabled} onClickHandler={incHandler}/>
-            <Button title={"reset"} disable={resButtonDisabled} onClickHandler={resetHandler}/>
-        </ButtonContainer>
-    </div>
-  );
+    return (
+        <div className="App">
+            <CounterContainer>
+                <ValueSettings setRestriction={setRestriction}/>
+                <ButtonContainer>
+                    <Button title={"set"} />
+                </ButtonContainer>
+            </CounterContainer>
+            <CounterContainer>
+                <Scoreboard score={score} restriction={restriction}/>
+                <ButtonContainer>
+                    <Button title={"inc"} disable={incButtonDisabled} onClickHandler={incHandler}/>
+                    <Button title={"reset"} onClickHandler={resetHandler}/>
+                </ButtonContainer>
+            </CounterContainer>
+        </div>
+    );
 }
 
 export default App;

@@ -11,7 +11,11 @@ const Button = styled.button`
     font-weight: 700;
     padding: 5px 36px;
     text-align: center;
+    background-color: #148383;
+    cursor: pointer;
 `
+
+
 
 export const S = {
     Button,
