@@ -28,7 +28,7 @@ function App() {
     const resetHandler = () => {
         reset(score)
     }
-    const incButtonDisabled = score === value
+    const isButtonDisabled = score === value
 
     const callBackButtonHandler = () => {
         setValue(maxValue)
@@ -47,7 +47,10 @@ function App() {
                     score={score}
                 />
                 <ButtonContainer>
-                    <Button name={"set"} callBack={callBackButtonHandler}/>
+                    <Button
+                        name={"set"}
+                        callBack={callBackButtonHandler}
+                    />
                 </ButtonContainer>
             </CounterContainer>
             <CounterContainer>
@@ -55,7 +58,7 @@ function App() {
                 <ButtonContainer>
                     <Button
                         name={"inc"}
-                        disable={incButtonDisabled}
+                        disable={isButtonDisabled}
                         callBack={incHandler}
                     />
                     <Button
