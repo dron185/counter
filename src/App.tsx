@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Scoreboard} from "./components/scoreboard/Scoreboard";
 import {Button} from "./components/button/Button";
@@ -9,14 +9,23 @@ import {ValueSettings} from './components/valueSettings/ValueSettings';
 function App() {
 
     const [score, setScore] = useState(0)
-    const [maxValue, setMaxValue] = useState(0)
+    const [maxValue, setMaxValue] = useState(5)
     const [startValue, setStartValue] = useState(0)
-    const [value, setValue] = useState(5)
     const [isDisabled, setIsDisabled] = useState(false)
+
+
+    useEffect(() => {
+        getFromLocalStorageHandler()
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("startValue", JSON.stringify(startValue))
+        localStorage.setItem("maxValue", JSON.stringify(maxValue))
+    }, [startValue, maxValue]);
 
     const inc = (score: number) => {
         score += 1;
-        (score > value) && (score = value);
+        (score > maxValue) && (score = maxValue);
         setScore(score)
     }
     const reset = (score: number) => {
@@ -31,9 +40,33 @@ function App() {
     }
 
     const callBackButtonHandler = () => {
-        setValue(maxValue)
         setScore(startValue)
         setIsDisabled(true)
+    }
+
+    // LocalStorage functions
+    // const setToLocalStorageHandler = () => {
+    //     localStorage.setItem("startValue", JSON.stringify(startValue))
+    //     localStorage.setItem("maxValue", JSON.stringify(maxValue))
+    // }
+
+    const getFromLocalStorageHandler = () => {
+        let startValueAsString = localStorage.getItem("startValue")
+        if (startValueAsString) {
+            let newStartValue = JSON.parse(startValueAsString);
+            setStartValue(newStartValue)
+        }
+
+        let maxValueAsString = localStorage.getItem("maxValue")
+        if (maxValueAsString) {
+            let newMaxValue = JSON.parse(maxValueAsString);
+            setMaxValue(newMaxValue)
+        }
+    }
+
+
+    const callBackInputHandler = () => {
+        // setToLocalStorageHandler()
     }
 
     return (
@@ -47,6 +80,7 @@ function App() {
                     setScore={setScore}
                     score={score}
                     setIsDisabled={setIsDisabled}
+                    callBackInput={callBackInputHandler}
                 />
                 <ButtonContainer>
                     <Button
@@ -57,11 +91,11 @@ function App() {
                 </ButtonContainer>
             </CounterContainer>
             <CounterContainer>
-                <Scoreboard score={score} value={value}/>
+                <Scoreboard score={score} value={maxValue}/>
                 <ButtonContainer>
                     <Button
                         name={"inc"}
-                        disable={score === value}
+                        disable={score === maxValue}
                         callBack={incHandler}
                     />
                     <Button

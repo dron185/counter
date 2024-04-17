@@ -10,6 +10,7 @@ type ValueSettingsPropsType = {
     setScore: (value: number) => void
     score: number
     setIsDisabled: (value: boolean) => void
+    callBackInput: () => void
 }
 
 export const ValueSettings = (props: ValueSettingsPropsType) => {
@@ -21,6 +22,7 @@ export const ValueSettings = (props: ValueSettingsPropsType) => {
                 htmlFor={"max"} text={"max value:"}
                 id={"max"}
                 setIsDisabled={props.setIsDisabled}
+                callBackInput={props.callBackInput}
             />
             <InputLabel
                 setNewValue={props.setStartValue}
@@ -28,6 +30,7 @@ export const ValueSettings = (props: ValueSettingsPropsType) => {
                 htmlFor={"start"} text={"start value:"}
                 id={"start"}
                 setIsDisabled={props.setIsDisabled}
+                callBackInput={props.callBackInput}
             />
         </S.ValueSettingsContainer>
     );

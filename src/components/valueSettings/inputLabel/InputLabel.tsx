@@ -8,6 +8,7 @@ type InputLabelPropsType = {
     setNewValue: (value: number) => void
     newValue: number
     setIsDisabled: (value: boolean) => void
+    callBackInput: () => void
 }
 
 export const InputLabel = (props: InputLabelPropsType) => {
@@ -16,6 +17,7 @@ export const InputLabel = (props: InputLabelPropsType) => {
         let value = Number(e.currentTarget.value);
         props.setNewValue(value)
         props.setIsDisabled(false)
+        props.callBackInput()
     }
 
     return (
