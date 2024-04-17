@@ -11,12 +11,16 @@ const StyleScoreboard = styled.div`
 `
 
 const Score = styled.span`
-    font-size: 60px;
+    font-size: 36px;
     font-weight: 600;
     color: #148383;
+`
+const WarningSpan= styled.span`
+    color: red
 `
 
 export const S = {
     StyleScoreboard,
     Score,
+    WarningSpan,
 }

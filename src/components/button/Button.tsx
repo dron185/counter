@@ -15,3 +15,4 @@ export const Button = ({name, disable, callBack}: ButtonPropsType) => {
         <S.Button disabled={disable} onClick={onClickButtonHandler}>{name}</S.Button>
     );
 };
+

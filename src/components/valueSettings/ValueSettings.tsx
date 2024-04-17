@@ -35,3 +35,4 @@ export const ValueSettings = (props: ValueSettingsPropsType) => {
         </S.ValueSettingsContainer>
     );
 };
+

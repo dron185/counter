@@ -13,6 +13,7 @@ function App() {
     const [startValue, setStartValue] = useState(0)
     const [isDisabled, setIsDisabled] = useState(false)
 
+    const [changedValue, setChangedValue] = useState(false)
 
     useEffect(() => {
         getFromLocalStorageHandler()
@@ -40,15 +41,16 @@ function App() {
     }
 
     const callBackButtonHandler = () => {
+        setStartValue(startValue)
+        setMaxValue(maxValue)
+
+
         setScore(startValue)
         setIsDisabled(true)
+
+        setChangedValue(false)
     }
 
-    // LocalStorage functions
-    // const setToLocalStorageHandler = () => {
-    //     localStorage.setItem("startValue", JSON.stringify(startValue))
-    //     localStorage.setItem("maxValue", JSON.stringify(maxValue))
-    // }
 
     const getFromLocalStorageHandler = () => {
         let startValueAsString = localStorage.getItem("startValue")
@@ -67,6 +69,9 @@ function App() {
 
     const callBackInputHandler = () => {
         // setToLocalStorageHandler()
+        setChangedValue(true)
+
+        setScore(startValue)
     }
 
     return (
@@ -91,16 +96,23 @@ function App() {
                 </ButtonContainer>
             </CounterContainer>
             <CounterContainer>
-                <Scoreboard score={score} value={maxValue}/>
+                <Scoreboard
+                    score={score}
+                    value={maxValue}
+                    changedValue={changedValue}
+                    startValue={startValue}
+                    maxValue={maxValue}
+                />
                 <ButtonContainer>
                     <Button
                         name={"inc"}
-                        disable={score === maxValue}
+                        disable={ changedValue ? true : score === maxValue}
                         callBack={incHandler}
                     />
                     <Button
                         name={"reset"}
                         callBack={resetHandler}
+                        disable={ changedValue && true }
                     />
                 </ButtonContainer>
             </CounterContainer>
@@ -109,3 +121,5 @@ function App() {
 }
 
 export default App;
+
+

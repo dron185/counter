@@ -31,3 +31,4 @@ export const InputLabel = (props: InputLabelPropsType) => {
         </S.InputLabel>
     );
 };
+
