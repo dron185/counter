@@ -10,7 +10,7 @@ const StyleScoreboard = styled.div`
     align-items: center;
 `
 
-const Score = styled.span`
+const ScoreText = styled.span`
     font-size: 36px;
     font-weight: 600;
     color: #148383;
@@ -19,8 +19,19 @@ const WarningSpan= styled.span`
     color: red
 `
 
+const Score = styled.span`
+    font-size: 55px;
+
+    //&.error {
+    //    color: red;
+    //}
+`
+
 export const S = {
     StyleScoreboard,
-    Score,
+    ScoreText,
     WarningSpan,
+    Score,
 }
+
+

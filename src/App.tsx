@@ -8,15 +8,27 @@ import {ValueSettings} from './components/valueSettings/ValueSettings';
 
 function App() {
 
-    const [score, setScore] = useState(0)
+    const [score, setScore] = useState(()=> {
+        let value = localStorage.getItem("startValue")
+        if (value) {
+            return +value
+        } else {
+            return 0;
+        }
+    })
     const [maxValue, setMaxValue] = useState(5)
     const [startValue, setStartValue] = useState(0)
     const [isDisabled, setIsDisabled] = useState(false)
 
     const [changedValue, setChangedValue] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
-        getFromLocalStorageHandler()
+        let values = getFromLocalStorageHandler()
+
+        // if (values.startValueAsString) {
+        //     setScore(+values.startValueAsString)
+        // }
     }, []);
 
     useEffect(() => {
@@ -41,13 +53,8 @@ function App() {
     }
 
     const callBackButtonHandler = () => {
-        setStartValue(startValue)
-        setMaxValue(maxValue)
-
-
         setScore(startValue)
         setIsDisabled(true)
-
         setChangedValue(false)
     }
 
@@ -64,14 +71,15 @@ function App() {
             let newMaxValue = JSON.parse(maxValueAsString);
             setMaxValue(newMaxValue)
         }
+        return {startValueAsString: startValueAsString, maxValueAsString:startValueAsString}
     }
 
 
     const callBackInputHandler = () => {
-        // setToLocalStorageHandler()
         setChangedValue(true)
-
         setScore(startValue)
+        // setError("enter values and press 'set'")
+        // console.log(error)
     }
 
     return (
@@ -91,6 +99,7 @@ function App() {
                     <Button
                         name={"set"}
                         callBack={callBackButtonHandler}
+                        // disable={isDisabled || !!error}
                         disable={isDisabled}
                     />
                 </ButtonContainer>
@@ -102,6 +111,8 @@ function App() {
                     changedValue={changedValue}
                     startValue={startValue}
                     maxValue={maxValue}
+                    // setError={setError}
+                    // error={error}
                 />
                 <ButtonContainer>
                     <Button
