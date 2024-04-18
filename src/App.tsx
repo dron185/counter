@@ -8,7 +8,7 @@ import {ValueSettings} from './components/valueSettings/ValueSettings';
 
 function App() {
 
-    const [score, setScore] = useState(()=> {
+    const [score, setScore] = useState(() => {
         let value = localStorage.getItem("startValue")
         if (value) {
             return +value
@@ -21,11 +21,11 @@ function App() {
     const [isDisabled, setIsDisabled] = useState(false)
 
     const [changedValue, setChangedValue] = useState(false)
-    const [error, setError] = useState<string | null>(null)
+    // const [error, setError] = useState<string | null>(null)
+
 
     useEffect(() => {
         let values = getFromLocalStorageHandler()
-
         // if (values.startValueAsString) {
         //     setScore(+values.startValueAsString)
         // }
@@ -35,6 +35,7 @@ function App() {
         localStorage.setItem("startValue", JSON.stringify(startValue))
         localStorage.setItem("maxValue", JSON.stringify(maxValue))
     }, [startValue, maxValue]);
+
 
     const inc = (score: number) => {
         score += 1;
@@ -58,7 +59,6 @@ function App() {
         setChangedValue(false)
     }
 
-
     const getFromLocalStorageHandler = () => {
         let startValueAsString = localStorage.getItem("startValue")
         if (startValueAsString) {
@@ -71,29 +71,45 @@ function App() {
             let newMaxValue = JSON.parse(maxValueAsString);
             setMaxValue(newMaxValue)
         }
-        return {startValueAsString: startValueAsString, maxValueAsString:startValueAsString}
+        return {startValueAsString: startValueAsString, maxValueAsString: startValueAsString}
     }
 
 
     const callBackInputHandler = () => {
+        // setChangedValue(true)
+        // setScore(startValue)
+
+        // startValue < 0 || startValue >= maxValue ?
+        //     setError('Incorrect value!') :
+        //     setError("enter values and press 'set'")
+    }
+
+
+    const onChangeMaxValue = (max: number) => {
         setChangedValue(true)
-        setScore(startValue)
-        // setError("enter values and press 'set'")
-        // console.log(error)
+        setMaxValue(max);
+        max <= startValue ? setIsDisabled(true) : setIsDisabled(false)
+    }
+
+    const onChangeStartValue = (start: number) => {
+        setChangedValue(true)
+        setStartValue(start);
+
+        (start < 0 || start >= maxValue) ? setIsDisabled(true) : setIsDisabled(false)
     }
 
     return (
         <div className="App">
             <CounterContainer>
                 <ValueSettings
-                    setMaxValue={setMaxValue}
+                    setMaxValue={onChangeMaxValue}
                     maxValue={maxValue}
-                    setStartValue={setStartValue}
+                    setStartValue={onChangeStartValue}
                     startValue={startValue}
                     setScore={setScore}
                     score={score}
                     setIsDisabled={setIsDisabled}
-                    callBackInput={callBackInputHandler}
+                    // callBackInput={callBackInputHandler}
                 />
                 <ButtonContainer>
                     <Button
@@ -117,13 +133,13 @@ function App() {
                 <ButtonContainer>
                     <Button
                         name={"inc"}
-                        disable={ changedValue ? true : score === maxValue}
+                        disable={changedValue ? true : score === maxValue}
                         callBack={incHandler}
                     />
                     <Button
                         name={"reset"}
                         callBack={resetHandler}
-                        disable={ changedValue && true }
+                        disable={changedValue && true}
                     />
                 </ButtonContainer>
             </CounterContainer>

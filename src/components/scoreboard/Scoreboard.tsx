@@ -7,6 +7,7 @@ type ScoreboardProps = {
     changedValue: boolean
     startValue: number
     maxValue: number
+
     // setError: (value: string) => void
     // error: string | null
 }
@@ -24,14 +25,7 @@ export const Scoreboard = (props: ScoreboardProps) => {
                      <S.WarningSpan>Incorrect value!</S.WarningSpan>
                 }
 
-
-                {/*{*/}
-                {/*    props.startValue >= 0 && props.startValue < props.maxValue ?*/}
-                {/*        ( <S.Score style={{color: props.score === props.value ? "red" : ""}}>*/}
-                {/*            {props.error ? props.error : props.score}*/}
-                {/*        </S.Score> ) :*/}
-                {/*        <S.WarningSpan>Incorrect value!</S.WarningSpan>*/}
-                {/*}*/}
+                {/*{props.changedValue ? props.error: props.score}*/}
 
             </S.ScoreText>
         </S.StyleScoreboard>
